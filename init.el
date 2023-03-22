@@ -77,7 +77,9 @@
        (java +lsp)       ; the poster child for carpal tunnel syndrome
        (lua +lsp)               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
-       org               ; organize your plain life in plain text
+       (org
+        +roam
+        +pretty)               ; organize your plain life in plain text
        (python +lsp +pyright)            ; beautiful is better than ugly
        (sh +lsp)               ; she sells {ba,z,fi}sh shells on the C xor
        (yaml +lsp)              ; JSON, but readable

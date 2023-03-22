@@ -1,4 +1,10 @@
 # -*- mode: snippet -*-
 # name: Standup
 # key: standup
+# expand-env: ((yas-indent-line 'auto)
 # --
+** <`(format-time-string "%Y-%m-%d %a")`> Standup $>
+*** What did I do?
+- $0
+*** What to do?
+- $1

@@ -132,18 +132,11 @@
 ;; Org mode
 (after! org (setq org-hide-emphasis-markers t))
 (after! org (setq org-insert-heading-respect-content nil))
+(setq org-adapt-indentation t
+      org-hide-leading-stars t
+      org-odd-levels-only t)
+(setq org-roam-directory "~/roam")
 
-(defun zz/add-file-keybinding (prefix key file &optional desc)
-  (let ((prefix prefix)
-        (key key)
-        (file file)
-        (desc desc))
-    (map! :leader
-          (:prefix prefix
-           :desc (or desc file)
-           key
-           (lambda () (interactive) (find-file file))))))
-(zz/add-file-keybinding "n" "d" "~/org/daniel.org" "Daniels Notes")
 
 ;; other
 (map! :n [mouse-8] #'better-jumper-jump-backward
@@ -164,3 +157,5 @@
 
 (eval-after-load 'evil-vars
  '(define-key evil-ex-completion-map (kbd "C-v") 'yank))
+(require 'evil-multiedit)
+(evil-multiedit-default-keybinds)
