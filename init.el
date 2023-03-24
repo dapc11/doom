@@ -17,7 +17,7 @@
 (doom! :input
        :completion
        (company +childframe)           ; the ultimate code completion backend
-       (vertico +icons)          ; the search engine of the future
+       vertico          ; the search engine of the future
 
        :ui
        doom              ; what makes DOOM look the way it does
@@ -61,7 +61,7 @@
        (docker +lsp)
        (eval +overlay)     ; run code, run (also, repls)
        lookup              ; navigate your code and its documentation
-       (lsp +eglot +peek)               ; M-x vscode
+       (lsp +peek)               ; M-x vscode
        magit             ; a git porcelain for Emacs
        ;;tmux              ; an API for interacting with tmux
        tree-sitter       ; syntax and parsing, sitting in a tree...
@@ -78,11 +78,12 @@
        (lua +lsp)               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
        (org
-        +roam
+        +roam2
         +pretty)               ; organize your plain life in plain text
        (python +lsp +pyright)            ; beautiful is better than ugly
        (sh +lsp)               ; she sells {ba,z,fi}sh shells on the C xor
        (yaml +lsp)              ; JSON, but readable
+       rest
 
        :config
        ;;literate
