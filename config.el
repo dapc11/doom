@@ -159,3 +159,14 @@
  '(define-key evil-ex-completion-map (kbd "C-v") 'yank))
 (require 'evil-multiedit)
 (evil-multiedit-default-keybinds)
+
+;; LSP
+;; Python
+(setq lsp-pylsp-plugins-flake8-enabled t)
+(setq lsp-pylsp-plugins-black-enabled t)
+(setq lsp-pylsp-plugins-pylint-enabled t)
+(defun projectile-test-prefix (project-type)
+  (cond
+   ((member project-type '(python generic)) "test")))
+
+;;

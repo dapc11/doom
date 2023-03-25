@@ -16,26 +16,25 @@
 
 (doom! :input
        :completion
-       (company +childframe)           ; the ultimate code completion backend
-       vertico          ; the search engine of the future
+       (company +childframe)  ; the ultimate code completion backend
+       vertico                ; the search engine of the future
 
        :ui
-       doom              ; what makes DOOM look the way it does
-       doom-dashboard    ; a nifty splash screen for Emacs
-       hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       indent-guides     ; highlighted indent columns
-       ligatures         ; ligatures and symbols to make your code pretty again
-       minimap           ; show a map of the code on the side
-       modeline          ; snazzy, Atom-inspired modeline, plus API
-       nav-flash         ; blink cursor line after big motions
-       neotree           ; a project drawer, like NERDTree for vim
-       ophints           ; highlight the region an operation acts on
+       doom                ; what makes DOOM look the way it does
+       doom-dashboard      ; a nifty splash screen for Emacs
+       hl-todo             ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
+       indent-guides       ; highlighted indent columns
+       ligatures           ; ligatures and symbols to make your code pretty again
+       minimap             ; show a map of the code on the side
+       modeline            ; snazzy, Atom-inspired modeline, plus API
+       nav-flash           ; blink cursor line after big motions
+       neotree             ; a project drawer, like NERDTree for vim
+       ophints             ; highlight the region an operation acts on
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
-       tabs              ; a tab bar for Emacs
-       ;;treemacs          ; a project drawer, like neotree but cooler
+       tabs                ; a tab bar for Emacs
        (vc-gutter +pretty) ; vcs diff in the fringe
-       vi-tilde-fringe   ; fringe tildes to mark beyond EOB
-       workspaces        ; tab emulation, persistence & separate workspaces
+       vi-tilde-fringe     ; fringe tildes to mark beyond EOB
+       workspaces          ; tab emulation, persistence & separate workspaces
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
@@ -55,34 +54,32 @@
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
-       syntax              ; tasing you for every semicolon you forget
+       syntax            ; tasing you for every semicolon you forget
 
        :tools
        (docker +lsp)
-       (eval +overlay)     ; run code, run (also, repls)
-       lookup              ; navigate your code and its documentation
-       (lsp +peek)               ; M-x vscode
+       (eval +overlay)   ; run code, run (also, repls)
+       lookup            ; navigate your code and its documentation
+       (lsp +peek)       ; M-x vscode
        magit             ; a git porcelain for Emacs
-       ;;tmux              ; an API for interacting with tmux
+       ;;tmux            ; an API for interacting with tmux
        tree-sitter       ; syntax and parsing, sitting in a tree...
 
        :os
-       (:if IS-MAC macos)  ; improve compatibility with macOS
-       ;;tty               ; improve the terminal Emacs experience
 
        :lang
        emacs-lisp        ; drown in parentheses
        (go +lsp)         ; the hipster dialect
-       (json + lsp)              ; At least it ain't XML
+       (json + lsp)      ; At least it ain't XML
        (java +lsp)       ; the poster child for carpal tunnel syndrome
-       (lua +lsp)               ; one-based indices? one-based indices
+       (lua +lsp)        ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
        (org
         +roam2
         +pretty)               ; organize your plain life in plain text
-       (python +lsp +pyright)            ; beautiful is better than ugly
+       (python +lsp +pyright)  ; beautiful is better than ugly
        (sh +lsp)               ; she sells {ba,z,fi}sh shells on the C xor
-       (yaml +lsp)              ; JSON, but readable
+       (yaml +lsp)             ; JSON, but readable
        rest
 
        :config
