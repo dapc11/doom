@@ -28,6 +28,7 @@
        minimap             ; show a map of the code on the side
        modeline            ; snazzy, Atom-inspired modeline, plus API
        nav-flash           ; blink cursor line after big motions
+       hydra
        neotree             ; a project drawer, like NERDTree for vim
        ophints             ; highlight the region an operation acts on
        (popup +defaults)   ; tame sudden yet inevitable temporary windows

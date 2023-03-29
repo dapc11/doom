@@ -32,28 +32,44 @@
 
 (setq evil-vsplit-window-right t
       evil-split-window-below t)
+(map!
+ (:leader
+  :desc "Verticae Split" :n "v" #'evil-window-vsplit
+  :desc "Horizontal Split" :n "s" #'evil-window-split))
 
 (defadvice! prompt-for-buffer (&rest _)
   :after '(evil-window-split evil-window-vsplit)
   (consult-buffer))
 
 (map! :map evil-window-map
-      "SPC" #'rotate-layout
-      ;; Navigation
-      "<left>"     #'evil-window-left
-      "<down>"     #'evil-window-down
-      "<up>"       #'evil-window-up
-      "<right>"    #'evil-window-right
-      ;; Swapping windows
-       "C-<left>"       #'+evil/window-move-left
-       "C-<down>"       #'+evil/window-move-down
-       "C-<up>"         #'+evil/window-move-up
-       "C-<right>"      #'+evil/window-move-right)
+        "SPC" #'rotate-layout
+        ;; Navigation
+        "<left>"       #'evil-window-left
+        "<down>"       #'evil-window-down
+        "<up>"         #'evil-window-up
+        "<right>"      #'evil-window-right
+
+        ;; Swapping windows
+        "C-<left>"     #'+evil/window-move-left
+        "C-<down>"     #'+evil/window-move-down
+        "C-<up>"       #'+evil/window-move-up
+        "C-<right>"    #'+evil/window-move-right)
+
 (map!
-      "C-<left>"     #'evil-window-left
-      "C-<down>"     #'evil-window-down
-      "C-<up>"       #'evil-window-up
-      "C-<right>"    #'evil-window-right)
+        "C-<left>"     #'evil-window-left
+        "C-<down>"     #'evil-window-down
+        "C-<up>"       #'evil-window-up
+        "C-<right>"    #'evil-window-right)
+
+(map!
+        :n "<b"        #'next-buffer
+        :n ">b"        #'previous-buffer
+        :n "<w"        #'+workspace/switch-right
+        :n ">w"        #'+workspace/switch-left
+        :n "<c"        #'git-gutter:next-hunk
+        :n ">c"        #'git-gutter:previous-hunk
+        :n "<d"        #'next-error
+        :n ">d"        #'previous-error)
 
 (map! :leader
       (:desc "Quit Buffer" "q" #'evil-quit)
@@ -76,8 +92,12 @@
       (:prefix "b"
        :desc "New empty Org buffer" "o" #'+evil-buffer-org-new))
 
+;; Counsel
 ;; (map! "C-s" #'counsel-grep-or-swiper)
 (map! "C-s" #'+default/search-buffer)
+(setq counsel-rg-base-command
+      "rg -zS -T jupyter -T svg -T lock -T license --no-heading --line-number --color never %s .")
+
 (after! smartparens
   (defun zz/goto-match-paren (arg)
     "Go to the matching paren/bracket, otherwise (or if ARG is not
@@ -169,4 +189,15 @@
   (cond
    ((member project-type '(python generic)) "test")))
 
-;;
+;; Git
+(defhydra git-hydra (:exit t)
+  ("g" magit "Magit")
+  ("b" magit-blame "Magit blame")
+  ("l" magit-log "Magit log")
+  ("t" git-timemachine-toggle "Git Time Machine toggle" :column "Time Machine")
+  ("r" git-gutter:revert-hunk "Git Gutter revert hunk" :column "Gutter")
+  ("a" git-gutter:stage-hunk "Git Gutter stage hunk"))
+
+(map!
+ (:leader
+  (:desc "git" :n "g" #'git-hydra/body)))
