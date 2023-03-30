@@ -224,12 +224,26 @@
 (define-key magit-mode-map "P" 'magit-push-gerrit)
 
 (advice-add 'risky-local-variable-p :override #'ignore)
-(setq projectile-switch-project-action 'neotree-projectile-action)
-(defun neotree-toggle-or-open-file-dir ()
- (interactive)
-  (if (neo-global--window-exists-p)
-      (neotree-hide)
-      (neo-open-dir (buffer-file-name))))
+
+;; Show only current project in workspace
+(setq treemacs-follow-mode t)
+(setq treemacs-width 35)
+(setq treemacs-space-between-root-nodes nil)
+(setq treemacs-project-follow-cleanup t)
+(setq treemacs-position 'left)
+
+;; Make Treemacs follow the current buffer
+(add-hook 'treemacs-mode-hook
+          (lambda ()
+            (treemacs-follow-mode t)
+            (treemacs-filewatch-mode t)
+            (setq treemacs-follow-after-init t)
+            (treemacs-fringe-indicator-mode 'always)))
+
+
+; Enable Treemacs and Projectile integration
 (map!
  (:leader
-  (:desc "Neotree" :n "e" #'neotree-toggle-or-open-file-dir)))
+  (:desc "Treemacs" :n "e" 'treemacs)
+  (:desc "Treemacs" :n "E" 'treemacs-projectile)
+  ))
