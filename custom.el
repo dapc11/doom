@@ -6,7 +6,12 @@
  '(package-selected-packages
    '(kubernetes-helm kubernetes-evil key-chord evil-snipe el-patch avy))
  '(safe-local-variable-values
-   '((lsp-diagnostics-disabled-modes python-mode)
+   '((add-hook 'python-mode-hook
+      (lambda nil
+        (setq indent-tabs-mode t)
+        (setq tab-width 4)
+        (setq python-indent-offset 4)))
+     (lsp-diagnostics-disabled-modes python-mode)
      (eval flycheck-add-next-checker 'python-flake8
       '(warning . python-pylint)))))
 (custom-set-faces

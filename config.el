@@ -166,8 +166,8 @@
       (list "~/" "/tmp" (expand-file-name "straight/repos" doom-local-dir)))
 
 (setq projectile-project-root-files
-      (list "bob" "pom.xml" ".git" "ruleset2.0.yaml"))
-(setq projectile-project-search-path '("~/.config/doom" ("~/repos_personal" . 1)("~/repos" . 1)))
+      (list "bob" "pom.xml" ".git" "ruleset2.0.yaml" "image-design-rule-check-report.html" ))
+(setq projectile-project-search-path '("~/.config/doom" ("~/repos_personal" . 1)("~/repos" . 1) ("~/Downloads/its" . 3 )))
 (defun projectile-ignored-project-function (filepath)
   "Return t if FILEPATH is within any of `projectile-ignored-projects'"
   (or (mapcar (lambda (p) (s-starts-with-p p filepath)) projectile-ignored-projects)))
@@ -201,3 +201,35 @@
 (map!
  (:leader
   (:desc "git" :n "g" #'git-hydra/body)))
+
+;;; Gerrit Push
+(transient-define-prefix magit-push-gerrit ()
+  "Push changes to Gerrit"
+  :transient-suffix 'transient--do-stay
+  ["Actions"
+   ("p" "Push to Gerrit" magit-push-to-gerrit)])
+(defun magit-push-to-gerrit ()
+  (interactive)
+  (magit-run-git "push" "origin" "HEAD:refs/for/master")
+  (message "Push to Gerrit completed."))
+(defun magit-push-gerrit ()
+  (interactive)
+  (let ((transient-display-buffer-action '(display-buffer-below-selected)))
+    (transient-setup 'magit-push-gerrit)))
+(define-transient-command magit-push-gerrit ()
+  "Push changes to Gerrit"
+  :transient-suffix 'transient--do-stay
+  ["Actions"
+   ("P" "Push to Gerrit" magit-push-to-gerrit)])
+(define-key magit-mode-map "P" 'magit-push-gerrit)
+
+(advice-add 'risky-local-variable-p :override #'ignore)
+(setq projectile-switch-project-action 'neotree-projectile-action)
+(defun neotree-toggle-or-open-file-dir ()
+ (interactive)
+  (if (neo-global--window-exists-p)
+      (neotree-hide)
+      (neo-open-dir (buffer-file-name))))
+(map!
+ (:leader
+  (:desc "Neotree" :n "e" #'neotree-toggle-or-open-file-dir)))
